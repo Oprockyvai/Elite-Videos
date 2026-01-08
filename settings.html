@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" class="premium-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - EliteVideos</title>
+    
+    <!-- CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css">
+    
+    <style>
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .settings-header {
+            margin-bottom: 40px;
+        }
+        
+        .settings-card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+        }
+        
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .settings-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .settings-label span {
+            font-weight: 500;
+        }
+        
+        .settings-label small {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-secondary);
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .select-control {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .settings-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .danger-zone {
+            border: 2px solid var(--danger);
+            background: rgba(244, 67, 54, 0.05);
+        }
+        
+        .danger-zone .settings-title {
+            color: var(--danger);
+        }
+        
+        .danger-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition-normal);
+        }
+        
+        .danger-btn:hover {
+            background: #d32f2f;
+        }
+        
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: 20px 15px;
+            }
+            
+            .settings-card {
+                padding: 20px;
+            }
+            
+            .settings-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .settings-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Age Verification Check -->
+    <script>
+        if(!localStorage.getItem('ageVerified')) {
+            window.location.href = '/age-verify.html';
+        }
+    </script>
+
+    <!-- Navigation -->
+    <nav class="premium-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Elite</span>
+                    <span class="logo-sub">SETTINGS</span>
+                </div>
+            </a>
+
+            <div class="nav-actions">
+                <a href="/" class="btn-secondary">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="settings-container">
+            <div class="settings-header">
+                <h1><i class="fas fa-cog"></i> Settings</h1>
+                <p class="subtitle">Customize your EliteVideos experience</p>
+            </div>
+
+            <!-- Video Settings -->
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="settings-title">
+                        <i class="fas fa-video"></i> Video Settings
+                    </h3>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Autoplay Videos</span>
+                            <small>Automatically play videos when page loads</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoplay" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Video Quality</span>
+                            <small>Default video quality preference</small>
+                        </div>
+                        <select class="select-control" id="videoQuality">
+                            <option value="auto">Auto (Recommended)</option>
+                            <option value="1080p">1080p HD</option>
+                            <option value="720p">720p HD</option>
+                            <option value="480p">480p</option>
+                        </select>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Subtitles</span>
+                            <small>Show subtitles when available</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="subtitles">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="settings-title">
+                        <i class="fas fa-shield-alt"></i> Privacy Settings
+                    </h3>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Viewing History</span>
+                            <small>Save videos you watch to history</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="saveHistory" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Search History</span>
+                            <small>Save your search queries</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="saveSearch" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Personalized Recommendations</span>
+                            <small>Use your viewing history for recommendations</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="personalizedRecs" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Settings -->
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="settings-title">
+                        <i class="fas fa-desktop"></i> Display Settings
+                    </h3>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Theme</span>
+                            <small>Choose your preferred theme</small>
+                        </div>
+                        <select class="select-control" id="theme">
+                            <option value="dark">Dark (Default)</option>
+                            <option value="light">Light</option>
+                            <option value="auto">Auto (System)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Video Grid Size</span>
+                            <small>Number of videos per row</small>
+                        </div>
+                        <select class="select-control" id="gridSize">
+                            <option value="auto">Auto (Recommended)</option>
+                            <option value="3">3 Videos per row</option>
+                            <option value="4">4 Videos per row</option>
+                            <option value="5">5 Videos per row</option>
+                        </select>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Reduced Motion</span>
+                            <small>Reduce animations and transitions</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="reducedMotion">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-card danger-zone">
+                <div class="settings-section">
+                    <h3 class="settings-title">
+                        <i class="fas fa-exclamation-triangle"></i> Danger Zone
+                    </h3>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Clear All Data</span>
+                            <small>Clear your viewing history, favorites, and preferences</small>
+                        </div>
+                        <button class="danger-btn" id="clearData">
+                            <i class="fas fa-trash"></i> Clear Data
+                        </button>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span>Reset Age Verification</span>
+                            <small>Require age verification again</small>
+                        </div>
+                        <button class="danger-btn" id="resetAge">
+                            <i class="fas fa-user-clock"></i> Reset Age Verification
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Settings -->
+            <div class="settings-actions">
+                <button class="btn-premium" id="saveSettings">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
+                <button class="btn-secondary" id="resetSettings">
+                    <i class="fas fa-redo"></i> Reset to Default
+                </button>
+                <a href="/" class="btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="/" class="mobile-nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="/category.html" class="mobile-nav-item">
+                <i class="fas fa-th-large nav-icon"></i>
+                <span>Categories</span>
+            </a>
+            <a href="/search.html" class="mobile-nav-item">
+                <i class="fas fa-search nav-icon"></i>
+                <span>Search</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileFavorites">
+                <i class="fas fa-heart nav-icon"></i>
+                <span>Favorites</span>
+            </a>
+            <a href="/settings.html" class="mobile-nav-item active">
+                <i class="fas fa-cog nav-icon"></i>
+                <span>Settings</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <p class="age-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <strong>SETTINGS:</strong> Your preferences are saved locally in your browser.
+            </p>
+            <p class="copyright">
+                &copy; 2024 EliteVideos. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/utils.js"></script>
+    <script>
+        // Load saved settings
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+            setupEventListeners();
+        });
+        
+        function loadSettings() {
+            // Load from localStorage
+            const settings = JSON.parse(localStorage.getItem('elitevideos_settings') || '{}');
+            
+            // Video Settings
+            if (document.getElementById('autoplay')) {
+                document.getElementById('autoplay').checked = settings.autoplay !== false;
+            }
+            
+            if (document.getElementById('videoQuality')) {
+                document.getElementById('videoQuality').value = settings.videoQuality || 'auto';
+            }
+            
+            if (document.getElementById('subtitles')) {
+                document.getElementById('subtitles').checked = settings.subtitles || false;
+            }
+            
+            // Privacy Settings
+            if (document.getElementById('saveHistory')) {
+                document.getElementById('saveHistory').checked = settings.saveHistory !== false;
+            }
+            
+            if (document.getElementById('saveSearch')) {
+                document.getElementById('saveSearch').checked = settings.saveSearch !== false;
+            }
+            
+            if (document.getElementById('personalizedRecs')) {
+                document.getElementById('personalizedRecs').checked = settings.personalizedRecs !== false;
+            }
+            
+            // Display Settings
+            if (document.getElementById('theme')) {
+                document.getElementById('theme').value = settings.theme || 'dark';
+            }
+            
+            if (document.getElementById('gridSize')) {
+                document.getElementById('gridSize').value = settings.gridSize || 'auto';
+            }
+            
+            if (document.getElementById('reducedMotion')) {
+                document.getElementById('reducedMotion').checked = settings.reducedMotion || false;
+            }
+        }
+        
+        function setupEventListeners() {
+            // Save Settings
+            const saveBtn = document.getElementById('saveSettings');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', saveSettings);
+            }
+            
+            // Reset Settings
+            const resetBtn = document.getElementById('resetSettings');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetSettings);
+            }
+            
+            // Clear Data
+            const clearDataBtn = document.getElementById('clearData');
+            if (clearDataBtn) {
+                clearDataBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to clear all your data? This cannot be undone.')) {
+                        clearAllData();
+                    }
+                });
+            }
+            
+            // Reset Age Verification
+            const resetAgeBtn = document.getElementById('resetAge');
+            if (resetAgeBtn) {
+                resetAgeBtn.addEventListener('click', function() {
+                    if (confirm('This will require age verification again. Continue?')) {
+                        localStorage.removeItem('ageVerified');
+                        localStorage.removeItem('ageVerificationDate');
+                        showToast('Age verification reset', 'success');
+                        setTimeout(() => window.location.href = '/', 2000);
+                    }
+                });
+            }
+        }
+        
+        function saveSettings() {
+            const settings = {
+                // Video Settings
+                autoplay: document.getElementById('autoplay').checked,
+                videoQuality: document.getElementById('videoQuality').value,
+                subtitles: document.getElementById('subtitles').checked,
+                
+                // Privacy Settings
+                saveHistory: document.getElementById('saveHistory').checked,
+                saveSearch: document.getElementById('saveSearch').checked,
+                personalizedRecs: document.getElementById('personalizedRecs').checked,
+                
+                // Display Settings
+                theme: document.getElementById('theme').value,
+                gridSize: document.getElementById('gridSize').value,
+       

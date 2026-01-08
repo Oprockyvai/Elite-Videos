@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Verification - EliteVideos</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Age verification required to access adult content">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css">
+    
+    <style>
+        .age-verify-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: var(--bg-primary);
+        }
+        
+        .verification-container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .back-home {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="age-verify-page">
+    <div class="verification-container">
+        <!-- Same age verification modal from index.html -->
+        <div class="age-verification-modal">
+            <div class="verification-logo">
+                <i class="fas fa-crown"></i>
+                <span class="logo-text">Elite<span class="premium-badge">PREMIUM</span></span>
+            </div>
+            
+            <div class="verification-header">
+                <h1><i class="fas fa-shield-alt"></i> Age Verification Required</h1>
+                <p class="subtitle">You must be 18 years or older to enter this site</p>
+            </div>
+            
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle warning-icon"></i>
+                <div class="warning-content">
+                    <h3>Explicit Content Warning</h3>
+                    <p>This website contains sexually explicit material intended for adults only. By entering, you confirm that you are at least 18 years of age and that you are not offended by such material.</p>
+                </div>
+            </div>
+            
+            <div class="verification-form">
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Enter Your Birth Date</label>
+                    <input type="date" id="birthDate" class="premium-input" max="2006-12-31">
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="ageConfirm" required>
+                    <label for="ageConfirm">
+                        <i class="fas fa-check-circle"></i> I confirm I am at least 18 years old
+                        <small>By checking this box, you agree to our Terms of Service</small>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termsConfirm" required>
+                    <label for="termsConfirm">
+                        <i class="fas fa-file-contract"></i> I agree to the Terms of Service
+                        <small>You must read and agree to our terms before proceeding</small>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="enterSite" class="btn-premium">
+                    <i class="fas fa-door-open"></i> Enter Site
+                </button>
+                <button id="leaveSite" class="btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Leave Site
+                </button>
+            </div>
+            
+            <div class="compliance-notice">
+                <p><i class="fas fa-user-shield"></i> We comply with all applicable laws including 18 U.S.C. 2257</p>
+            </div>
+            
+            <a href="/" class="back-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script>
+        // Age verification logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const enterBtn = document.getElementById('enterSite');
+            const leaveBtn = document.getElementById('leaveSite');
+            const birthDateInput = document.getElementById('birthDate');
+            const ageConfirm = document.getElementById('ageConfirm');
+            const termsConfirm = document.getElementById('termsConfirm');
+            
+            // Set max date to 18 years ago
+            const today = new Date();
+            const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+            birthDateInput.max = maxDate.toISOString().split('T')[0];
+            
+            if (enterBtn) {
+                enterBtn.addEventListener('click', function() {
+                    const birthDate = new Date(birthDateInput.value);
+                    
+                    if (!birthDateInput.value) {
+                        alert('Please enter your birth date');
+                        return;
+                    }
+                    
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const monthDiff = today.getMonth() - birthDate.getMonth();
+                    
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    
+                    if (age >= 18 && ageConfirm.checked && termsConfirm.checked) {
+                        localStorage.setItem('ageVerified', 'true');
+                        localStorage.setItem('ageVerificationDate', new Date().toISOString());
+                        window.location.href = '/';
+                    } else {
+                        alert('You must be 18+ and agree to terms');
+                    }
+                });
+            }
+            
+            if (leaveBtn) {
+                leaveBtn.addEventListener('click', function() {
+                    window.location.href = 'https://www.google.com';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

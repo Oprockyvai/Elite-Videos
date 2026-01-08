@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Sitemap Generator - EliteVideos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f, #12121a);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #1e1e2d;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid #2a2a3a;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ff4081;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #ff4081;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .header p {
+            color: #b0b0c0;
+            font-size: 16px;
+        }
+        
+        .config-section {
+            background: #252536;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #2a2a3a;
+        }
+        
+        .section-title {
+            color: #00bcd4;
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b0b0c0;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1a1a24;
+            border: 2px solid #2a2a3a;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ff4081;
+            box-shadow: 0 0 0 3px rgba(255, 64, 129, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a24, #252536);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #2a2a3a;
+            transition: 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff4081;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff4081;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #b0b0c0;
+            font-size: 14px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+            min-width: 200px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff4081, #7c4dff);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #2a2a3a;
+            color: #b0b0c0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #c60055, #5c2bff);
+        }
+        
+        .btn-secondary:hover {
+            background: #3a3a4a;
+            color: white;
+        }
+        
+        .preview-section {
+            background: #252536;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #2a2a3a;
+            display: none;
+        }
+        
+        .preview-section.active {
+            display: block;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        #previewContent {
+            background: #1a1a24;
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #b0b0c0;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .notification.error {
+            background: #f44336;
+        }
+        
+        .notification.show {
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> Auto Sitemap Generator</h1>
+            <p>Automatically generate sitemap.xml for your EliteVideos website</p>
+        </div>
+        
+        <div class="config-section">
+            <h2 class="section-title"><i class="fas fa-cog"></i> Configuration</h2>
+            
+            <div class="form-group">
+                <label><i class="fas fa-globe"></i> Website Domain</label>
+                <input type="text" id="domain" class="form-control" value="https://yourdomain.com" placeholder="https://yourdomain.com">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-folder"></i> Output Filename</label>
+                <input type="text" id="filename" class="form-control" value="sitemap.xml">
+            </div>
+        </div>
+        
+        <div class="stats-grid" id="statsContainer">
+            <!-- Stats will be loaded here -->
+        </div>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" id="generateBtn">
+                <i class="fas fa-magic"></i> Generate Sitemap
+            </button>
+            <button class="btn btn-secondary" id="previewBtn">
+                <i class="fas fa-eye"></i> Preview XML
+            </button>
+            <button class="btn btn-secondary" id="downloadBtn">
+                <i class="fas fa-download"></i> Download XML
+            </button>
+            <button class="btn btn-secondary" id="uploadBtn">
+                <i class="fas fa-upload"></i> Upload to Server
+            </button>
+        </div>
+        
+        <div class="preview-section" id="previewSection">
+            <div class="preview-header">
+                <h2 class="section-title"><i class="fas fa-code"></i> Sitemap Preview</h2>
+                <button class="btn-secondary" style="padding: 8px 15px; font-size: 14px;" id="closePreview">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+            <pre id="previewContent"></pre>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Sitemap generated successfully!</span>
+    </div>
+
+    <script>
+        // Sample data (in real case, fetch from API)
+        const sampleVideos = [
+            { id: "1", title: "Premium HD Experience", description: "Experience the best in HD quality", thumbnail: "/assets/thumbnails/thumb1.jpg", embedUrl: "https://example.com/embed/video1", duration: 634, rating: 4.8, views: 12500, uploadDate: "2024-01-10", model: ["Lily Rose"] },
+            { id: "2", title: "Trending Now", description: "Currently trending video", thumbnail: "/assets/thumbnails/thumb2.jpg", embedUrl: "https://example.com/embed/video2", duration: 452, rating: 4.5, views: 23400, uploadDate: "2024-01-12", model: ["Sophia Lee"] }
+        ];
+        
+        const sampleCategories = [
+            { id: "trending", name: "Trending Now" },
+            { id: "new", name: "New Releases" },
+            { id: "popular", name: "Most Popular" },
+            { id: "hd", name: "HD Quality" }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+            setupEventListeners();
+        });
+        
+        function loadStats() {
+            const statsContainer = document.getElementById('statsContainer');
+            
+            // In real case, fetch from API
+            const stats = {
+                videos: sampleVideos.length,
+                categories: sampleCategories.length,
+                pages: 6, // Home, Search, 4 legal pages
+                total: sampleVideos.length + sampleCategories.length + 6
+            };
+            
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.videos}</div>
+                    <div class="stat-label">Total Videos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.categories}</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.pages}</div>
+                    <div class="stat-label">Static Pages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total}</div>
+                    <div class="stat-label">Total URLs</div>
+                </div>
+            `;
+        }
+        
+        function setupEventListeners() {
+            // Generate Button
+            document.getElementById('generateBtn').addEventListener('click', generateSitemap);
+            
+            // Preview Button
+            document.getElementById('previewBtn').addEventListener('click', previewSitemap);
+            
+            // Download Button
+            document.getElementById('downloadBtn').addEventListener('click', downloadSitemap);
+            
+            // Upload Button
+            document.getElementById('uploadBtn').addEventListener('click', uploadSitemap);
+            
+            // Close Preview
+            document.getElementById('closePreview').addEventListener('click', function() {
+                document.getElementById('previewSection').classList.remove('active');
+            });
+        }
+        
+        function getCurrentDate() {
+            return new Date().toISOString().split('T')[0];
+        }
+        
+        function getExpirationDate(uploadDate) {
+            const date = new Date(uploadDate);
+            date.setFullYear(date.getFullYear() + 1);
+            return date.toISOString().split('T')[0];
+        }
+        
+        function generateSitemapXML(videos, categories, domain) {
+            const currentDate = getCurrentDate();
+            const legalPages = ['terms', 'privacy', 'dmca', '2257'];
+            
+            let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+            xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n`;
+            
+            // Homepage
+            xml += `    <url>\n`;
+            xml += `        <loc>${domain}/</loc>\n`;
+            xml += `        <lastmod>${currentDate}</lastmod>\n`;
+            xml += `        <changefreq>daily</changefreq>\n`;
+            xml += `        <priority>1.0</priority>\n`;
+            xml += `    </url>\n\n`;
+            
+            // Search
+            xml += `    <url>\n`;
+            xml += `        <loc>${domain}/search</loc>\n`;
+            xml += `        <lastmod>${currentDate}</lastmod>\n`;
+            xml += `        <changefreq>daily</changefreq>\n`;
+            xml += `        <priority>0.8</priority>\n`;
+            xml += `    </url>\n\n`;
+            
+            // Categories
+            categories.forEach(cat => {
+                xml += `    <url>\n`;
+                xml += `        <loc>${domain}/category/${cat.id}</loc>\n`;
+                xml += `        <lastmod>${currentDate}</lastmod>\n`;
+                xml += `        <changefreq>daily</changefreq>\n`;
+                xml += `        <priority>0.9</priority>\n`;
+                xml += `    </url>\n`;
+            });
+            xml += `\n`;
+            
+            // Legal Pages
+            legalPages.forEach(page => {
+                xml += `    <url>\n`;
+                xml += `        <loc>${domain}/${page}</loc>\n`;
+                xml += `        <lastmod>${currentDate}</lastmod>\n`;
+                xml += `        <changefreq>monthly</changefreq>\n`;
+                xml += `        <priority>0.5</priority>\n`;
+                xml += `    </url>\n`;
+            });
+            xml += `\n`;
+            
+            // Videos
+            videos.forEach(video => {
+                xml += `    <url>\n`;
+                xml += `        <loc>${domain}/video/${video.id}</loc>\n`;
+                xml += `        <lastmod>${video.uploadDate}</lastmod>\n`;
+                xml += `        <changefreq>weekly</changefreq>\n`;
+                xml += `        <priority>0.8</priority>\n`;
+                xml += `    </url>\n`;
+            });
+            
+            xml += `</urlset>`;
+            
+            return xml;
+        }
+        
+        function generateSitemap() {
+            const domain = document.getElementById('domain').value;
+            const filename = document.getElementById('filename').value;
+            
+            if (!domain || !domain.startsWith('http')) {
+                showNotification('Please enter a valid domain starting with http:// or https://', true);
+                return;
+            }
+            
+            // In real case, fetch actual data from your API
+            const sitemapXML = generateSitemapXML(sampleVideos, sampleCategories, domain);
+            
+            // Create and download file
+            const blob = new Blob([sitemapXML], { type: 'application/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification(`Sitemap generated and downloaded as ${filename}`);
+        }
+        
+        function previewSitemap() {
+            const domain = document.getElementById('domain').value;
+            const sitemapXML = generateSitemapXML(sampleVideos, sampleCategories, domain);
+            
+            document.getElementById('previewContent').textContent = sitemapXML;
+            document.getElementById('previewSection').classList.add('active');
+        }
+        
+        function downloadSitemap() {
+            generateSitemap(); // Same function for now
+        }
+        
+        function uploadSitemap() {
+            const domain = document.getElementById('domain').value;
+            const filename = document.getElementById('filename').value;
+            
+            // In real case, this would upload to server via AJAX
+            showNotification('Upload feature would work on actual server setup');
+        }
+        
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            
+            text.textContent = message;
+            notification.classList.remove('error');
+            
+            if (isError) {
+                notification.classList.add('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

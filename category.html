@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="premium-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Categories - EliteVideos</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Browse adult videos by categories. Find your favorite content organized by type and preference">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css">
+</head>
+<body>
+    <!-- Age Verification Check -->
+    <script>
+        if(!localStorage.getItem('ageVerified')) {
+            window.location.href = '/age-verify.html';
+        }
+    </script>
+
+    <!-- Navigation -->
+    <nav class="premium-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Elite</span>
+                    <span class="logo-sub">PREMIUM</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="globalSearch" placeholder="Search videos...">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <div class="nav-user">
+                <button class="user-menu-btn" id="userMenuBtn">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Menu</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Category Header -->
+        <div class="category-header">
+            <h1><i class="fas fa-th-large"></i> Browse Categories</h1>
+            <p class="category-subtitle">Find videos by category. Click any category to view all videos in that section.</p>
+        </div>
+
+        <!-- All Categories Grid -->
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Categories will be loaded here -->
+        </div>
+
+        <!-- Featured Category -->
+        <div class="featured-category" id="featuredCategory">
+            <!-- Featured category will be loaded here -->
+        </div>
+
+        <!-- Category Videos -->
+        <section class="category-videos-section">
+            <div class="section-header">
+                <h2 class="section-title" id="categoryTitle">
+                    <i class="fas fa-play-circle"></i> Popular Videos
+                </h2>
+                <div class="category-sort">
+                    <select id="categorySort" class="filter-select">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest First</option>
+                        <option value="views">Most Viewed</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="video-grid" id="categoryVideos">
+                <!-- Category videos will be loaded here -->
+            </div>
+            
+            <div class="load-more-container">
+                <button id="loadMore" class="btn-premium">
+                    <i class="fas fa-plus"></i> Load More Videos
+                </button>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="recommendations-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-random"></i> Mixed Recommendations
+                </h2>
+                <a href="#" class="view-all" id="shuffleVideos">
+                    Shuffle <i class="fas fa-random"></i>
+                </a>
+            </div>
+            <div class="video-grid" id="categoryRecommendations">
+                <!-- Recommendations will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="/" class="mobile-nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="/category.html" class="mobile-nav-item active">
+                <i class="fas fa-th-large nav-icon"></i>
+                <span>Categories</span>
+            </a>
+            <a href="/search.html" class="mobile-nav-item">
+                <i class="fas fa-search nav-icon"></i>
+                <span>Search</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileFavorites">
+                <i class="fas fa-heart nav-icon"></i>
+                <span>Favorites</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileMenu">
+                <i class="fas fa-bars nav-icon"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <p class="age-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <strong>WARNING:</strong> This site contains adult content. You must be 18 years or older to access.
+            </p>
+            <p class="copyright">
+                &copy; 2024 EliteVideos. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/database.js"></script>
+    <script>
+        // Get category from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('cat');
+        
+        // Load category page
+        document.addEventListener('DOMContentLoaded', function() {
+            if(category) {
+                document.title = category.charAt(0).toUpperCase() + category.slice(1) + ' Videos - EliteVideos';
+                document.getElementById('categoryTitle').innerHTML = 
+                    `<i class="fas fa-tag"></i> ${category.charAt(0).toUpperCase() + category.slice(1)} Videos`;
+                
+                // Load category videos
+                loadCategoryVideos(category);
+            } else {
+                loadAllCategories();
+            }
+        });
+        
+        async function loadCategoryVideos(cat) {
+            // This function will be implemented in database.js
+            console.log('Loading category:', cat);
+        }
+        
+        async function loadAllCategories() {
+            // This function will be implemented in database.js
+            console.log('Loading all categories');
+        }
+    </script>
+</body>
+</html>

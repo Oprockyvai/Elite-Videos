@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" class="premium-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteVideos - Premium Adult Entertainment Platform</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Premium adult video platform with exclusive HD content. Thousands of videos in multiple categories. Strictly 18+ only.">
+    <meta name="keywords" content="adult videos, premium content, HD videos, entertainment, exclusive videos, adult entertainment">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="EliteVideos">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elitevideos.com/">
+    <meta property="og:title" content="EliteVideos - Premium Adult Entertainment">
+    <meta property="og:description" content="Exclusive HD adult content. 18+ only.">
+    <meta property="og:image" content="https://elitevideos.com/assets/logos/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EliteVideos - Premium Adult Entertainment">
+    <meta name="twitter:description" content="Exclusive HD adult content. 18+ only.">
+    <meta name="twitter:image" content="https://elitevideos.com/assets/logos/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "EliteVideos",
+        "url": "https://elitevideos.com/",
+        "description": "Premium adult video platform with exclusive content",
+        "publisher": {
+            "@type": "Organization",
+            "name": "EliteVideos",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://elitevideos.com/assets/logos/logo.png"
+            }
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://elitevideos.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Age Verification -->
+    <div id="ageVerification" class="age-verification-overlay" style="display: none;">
+        <div class="age-verification-modal">
+            <div class="verification-logo">
+                <i class="fas fa-crown"></i>
+                <span class="logo-text">Elite<span class="premium-badge">PREMIUM</span></span>
+            </div>
+            
+            <div class="verification-header">
+                <h1><i class="fas fa-shield-alt"></i> Age Verification Required</h1>
+                <p class="subtitle">You must be 18 years or older to enter this site</p>
+            </div>
+            
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle warning-icon"></i>
+                <div class="warning-content">
+                    <h3>Explicit Content Warning</h3>
+                    <p>This website contains sexually explicit material intended for adults only. By entering, you confirm that you are at least 18 years of age and that you are not offended by such material.</p>
+                </div>
+            </div>
+            
+            <div class="verification-form">
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Enter Your Birth Date</label>
+                    <input type="date" id="birthDate" class="premium-input" max="2006-12-31">
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="ageConfirm" required>
+                    <label for="ageConfirm">
+                        <i class="fas fa-check-circle"></i> I confirm I am at least 18 years old
+                        <small>By checking this box, you agree to our Terms of Service</small>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termsConfirm" required>
+                    <label for="termsConfirm">
+                        <i class="fas fa-file-contract"></i> I agree to the Terms of Service
+                        <small>You must read and agree to our terms before proceeding</small>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="enterSite" class="btn-premium">
+                    <i class="fas fa-door-open"></i> Enter Site
+                </button>
+                <button id="leaveSite" class="btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Leave Site
+                </button>
+            </div>
+            
+            <div class="compliance-notice">
+                <p><i class="fas fa-user-shield"></i> We comply with all applicable laws including 18 U.S.C. 2257</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Navigation -->
+    <nav class="premium-nav">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Elite</span>
+                    <span class="logo-sub">PREMIUM</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="globalSearch" placeholder="Search videos...">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <!-- Category Menu -->
+            <div class="nav-menu">
+                <button class="category-menu-btn" id="categoryMenuBtn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="category-dropdown" id="categoryDropdown">
+                    <!-- Categories will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- User Menu -->
+            <div class="nav-user">
+                <button class="user-menu-btn" id="userMenuBtn">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Menu</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="/searchdata.html"><i class="fas fa-plus-circle"></i> Add Video</a>
+                    <a href="/category.html"><i class="fas fa-list"></i> Categories</a>
+                    <a href="#" id="favoritesBtn"><i class="fas fa-heart"></i> Favorites</a>
+                    <a href="#" id="historyBtn"><i class="fas fa-history"></i> History</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="/help.html"><i class="fas fa-question-circle"></i> Help</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="hero-badge">
+                    <i class="fas fa-star"></i> PREMIUM COLLECTION
+                </span>
+                <h1 class="hero-title">Exclusive Adult Entertainment</h1>
+                <p class="hero-subtitle">Discover thousands of premium HD videos in curated categories. New content added daily.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalVideos">10K+</h3>
+                            <p>Videos</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>50K+</h3>
+                            <p>Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>24/7</h3>
+                            <p>Updated</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Navigation -->
+        <nav class="category-nav">
+            <div class="category-nav-scroll" id="categoryNav">
+                <!-- Categories will be loaded here -->
+            </div>
+        </nav>
+
+        <!-- Trending Videos -->
+        <section class="video-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-fire"></i> Trending Now
+                </h2>
+                <a href="/category.html?cat=trending" class="view-all">
+                    View All <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="video-grid" id="trendingVideos">
+                <!-- Trending videos will be loaded here -->
+            </div>
+        </section>
+
+        <!-- New Videos -->
+        <section class="video-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i> New Releases
+                </h2>
+                <a href="/category.html?cat=new" class="view-all">
+                    View All <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="video-grid" id="newVideos">
+                <!-- New videos will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Recommended For You -->
+        <section class="video-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-thumbs-up"></i> Recommended For You
+                </h2>
+                <a href="#" class="view-all" id="refreshRecommendations">
+                    Refresh <i class="fas fa-sync-alt"></i>
+                </a>
+            </div>
+            <div class="video-grid" id="recommendedVideos">
+                <!-- Recommended videos will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Premium Features -->
+        <section class="premium-features">
+            <h2 class="section-title text-center">Why Choose Elite?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hd"></i>
+                    </div>
+                    <h3>HD Quality</h3>
+                    <p>All videos in full HD 1080p quality for the best viewing experience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safe & Secure</h3>
+                    <p>Secure platform with age verification and privacy protection</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <h3>Daily Updates</h3>
+                    <p>New content added daily across all categories</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Optimized</h3>
+                    <p>Perfect viewing experience on all devices</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="/" class="mobile-nav-item active">
+                <i class="fas fa-home nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="/category.html" class="mobile-nav-item">
+                <i class="fas fa-th-large nav-icon"></i>
+                <span>Categories</span>
+            </a>
+            <a href="/search.html" class="mobile-nav-item">
+                <i class="fas fa-search nav-icon"></i>
+                <span>Search</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileFavorites">
+                <i class="fas fa-heart nav-icon"></i>
+                <span>Favorites</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileMenu">
+                <i class="fas fa-bars nav-icon"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <a href="/" class="footer-logo">
+                    <i class="fas fa-crown"></i> Elite<span>PREMIUM</span>
+                </a>
+                <p class="footer-description">Premium adult entertainment platform with exclusive content for adults only.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/category.html">Categories</a></li>
+                    <li><a href="/search.html">Search</a></li>
+                    <li><a href="/trending.html">Trending</a></li>
+                    <li><a href="/new.html">New Videos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/terms.html">Terms of Service</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/dmca.html">DMCA</a></li>
+                    <li><a href="/2257.html">2257 Compliance</a></li>
+                    <li><a href="/age-verify.html">Age Verification</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:contact@elitevideos.com">Contact Us</a></li>
+                    <li><a href="/report.html">Report Content</a></li>
+                    <li><a href="/help.html">Help Center</a></li>
+                    <li><a href="/sitemap.xml">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="age-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <strong>WARNING:</strong> This site contains adult content. You must be 18 years or older to access.
+            </p>
+            <p class="copyright">
+                &copy; 2024 EliteVideos. All rights reserved. All models are 18 years of age or older.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/database.js"></script>
+    <script src="/js/recommendations.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+# robots.txt for EliteVideos - Premium Adult Site
+# Generated: January 15, 2024
+
+User-agent: *
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /backup/
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/uploads/
+Disallow: /includes/
+Disallow: /config/
+Disallow: /sql/
+Disallow: /database/
+Disallow: /logs/
+Disallow: /cache/
+Disallow: /tmp/
+Disallow: /error/
+Disallow: /install/
+Disallow: /phpmyadmin/
+Disallow: /pma/
+Disallow: /myadmin/
+Disallow: /server-status/
+Disallow: /server-info/
+
+# Allow access to important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /manifest.json
+Allow: /favicon.ico
+Allow: /apple-touch-icon.png
+
+# Allow access to assets (with caution)
+Allow: /assets/logos/
+Allow: /assets/icons/
+Allow: /assets/thumbnails/
+
+# Block access to sensitive directories
+Disallow: /js/
+Disallow: /css/
+Disallow: /api/
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /composer/
+Disallow: /env/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /.htaccess
+Disallow: /.htpasswd
+Disallow: /web.config
+
+# Crawl delay to prevent server overload
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# ---------- Specific Bot Rules ----------
+
+# Google bots
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Googlebot-Video
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /assets/thumbnails/
+Crawl-delay: 5
+Clean-param: ref /video.html
+
+# Bing bots
+User-agent: bingbot
+User-agent: MSNBot
+User-agent: MSNBot-Media
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /assets/thumbnails/
+Crawl-delay: 5
+
+# Yahoo bots
+User-agent: Slurp
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Crawl-delay: 10
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /assets/thumbnails/
+Crawl-delay: 5
+
+# Yandex
+User-agent: Yandex
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Crawl-delay: 10
+Clean-param: ref /video.html
+
+# Baidu
+User-agent: Baiduspider
+User-agent: Baiduspider-image
+User-agent: Baiduspider-video
+User-agent: Baiduspider-news
+User-agent: Baiduspider-favo
+User-agent: Baiduspider-cpro
+User-agent: Baiduspider-ads
+Disallow: /
+
+# Facebook
+User-agent: facebookexternalhit
+User-agent: Facebot
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+Crawl-delay: 5
+
+# Twitter
+User-agent: Twitterbot
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+Crawl-delay: 5
+
+# Pinterest
+User-agent: Pinterest
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+Crawl-delay: 5
+
+# LinkedIn
+User-agent: LinkedInBot
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+Crawl-delay: 5
+
+# Apple bots
+User-agent: Applebot
+Disallow: /searchdata.html
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+Crawl-delay: 5
+
+# ----- Bad Bots Block -----
+User-agent: AhrefsBot
+User-agent: SEMrushBot
+User-agent: MJ12bot
+User-agent: dotbot
+User-agent: megaindex.ru
+User-agent: ZoominfoBot
+User-agent: YandexBot
+User-agent: BLEXBot
+User-agent: ExtLinksBot
+User-agent: AiHitBot
+User-agent: DomainCrawler
+User-agent: SurveyBot
+User-agent: Nutch
+User-agent: Java
+User-agent: Wget
+User-agent: curl
+User-agent: libwww
+User-agent: Perl
+User-agent: Python
+User-agent: ^$
+Disallow: /
+
+# ----- Good Bots Allow -----
+User-agent: GPTBot
+User-agent: CCBot
+User-agent: ChatGPT-User
+User-agent: Claude-Web
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 2

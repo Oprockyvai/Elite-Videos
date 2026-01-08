@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="premium-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - EliteVideos</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Watch premium adult videos in HD quality">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Video Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Premium Adult Video",
+        "description": "Watch exclusive HD adult content",
+        "thumbnailUrl": "https://elitevideos.com/assets/thumbnails/default.jpg",
+        "uploadDate": "2024-01-15",
+        "duration": "PT10M30S",
+        "contentUrl": "https://elitevideos.com/video/1",
+        "embedUrl": "https://elitevideos.com/video/embed/1",
+        "regionsAllowed": "US,CA,UK,AU,EU"
+    }
+    </script>
+    
+    <!-- CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css">
+    
+    <!-- Video Player CSS -->
+    <style>
+        .video-player-page {
+            padding-top: 80px;
+        }
+        
+        .player-container {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        #videoIframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .video-info-panel {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .video-title-main {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .video-meta-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .video-stats {
+            display: flex;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .video-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+        }
+        
+        .action-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        
+        .action-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .video-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .video-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .video-tag {
+            background: rgba(124, 77, 255, 0.1);
+            color: var(--secondary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .recommendations-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .more-from-category {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            #videoIframe {
+                height: 300px;
+            }
+            
+            .video-meta-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Age Verification Check -->
+    <script>
+        if(!localStorage.getItem('ageVerified')) {
+            window.location.href = '/age-verify.html';
+        }
+    </script>
+
+    <!-- Navigation -->
+    <nav class="premium-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">Elite</span>
+                    <span class="logo-sub">PREMIUM</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="globalSearch" placeholder="Search videos...">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <a href="/category.html" class="btn-secondary" style="margin-right: 15px;">
+                <i class="fas fa-th-large"></i> Categories
+            </a>
+
+            <div class="nav-user">
+                <button class="user-menu-btn" id="userMenuBtn">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Menu</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content video-player-page">
+        <!-- Back Button -->
+        <div class="back-navigation">
+            <a href="javascript:history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <a href="/" class="back-btn">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </div>
+
+        <!-- Video Player -->
+        <div class="player-container">
+            <iframe 
+                id="videoIframe" 
+                src="" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <!-- Video Info -->
+        <div class="video-info-panel">
+            <h1 class="video-title-main" id="videoTitle">Loading video...</h1>
+            
+            <div class="video-meta-info">
+                <div class="video-stats">
+                    <span id="videoViews">
+                        <i class="fas fa-eye"></i> Loading...
+                    </span>
+                    <span id="videoDuration">
+                        <i class="fas fa-clock"></i> Loading...
+                    </span>
+                    <span id="videoUploadDate">
+                        <i class="fas fa-calendar"></i> Loading...
+                    </span>
+                </div>
+                
+                <div class="video-actions">
+                    <button class="action-btn" id="likeBtn">
+                        <i class="fas fa-thumbs-up"></i> <span id="likeCount">0</span>
+                    </button>
+                    <button class="action-btn" id="dislikeBtn">
+                        <i class="fas fa-thumbs-down"></i> <span id="dislikeCount">0</span>
+                    </button>
+                    <button class="action-btn" id="favoriteBtn">
+                        <i class="fas fa-heart"></i> Save
+                    </button>
+                    <button class="action-btn" id="shareBtn">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                </div>
+            </div>
+            
+            <div class="video-description" id="videoDescription">
+                Loading description...
+            </div>
+            
+            <div class="video-tags" id="videoTags">
+                <!-- Tags will be loaded here -->
+            </div>
+        </div>
+
+        <!-- More from this category -->
+        <div class="more-from-category">
+            <div class="recommendations-header">
+                <h2>
+                    <i class="fas fa-tag"></i> 
+                    More from <span id="categoryName">this category</span>
+                </h2>
+                <a href="/category.html" id="viewAllCategory" class="view-all">
+                    View All <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="video-grid" id="categoryVideos">
+                <!-- Category videos will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Recommended Videos -->
+        <section class="recommendations-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-random"></i> Recommended For You
+                </h2>
+                <a href="#" class="view-all" id="refreshRecs">
+                    Refresh <i class="fas fa-sync-alt"></i>
+                </a>
+            </div>
+            <div class="video-grid" id="recommendedVideos">
+                <!-- Recommendations will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="/" class="mobile-nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="/category.html" class="mobile-nav-item">
+                <i class="fas fa-th-large nav-icon"></i>
+                <span>Categories</span>
+            </a>
+            <a href="/search.html" class="mobile-nav-item">
+                <i class="fas fa-search nav-icon"></i>
+                <span>Search</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileFavorites">
+                <i class="fas fa-heart nav-icon"></i>
+                <span>Favorites</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobileMenu">
+                <i class="fas fa-bars nav-icon"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <p class="age-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <strong>WARNING:</strong> This site contains adult content. You must be 18 years or older to access.
+            </p>
+            <p class="copyright">
+                &copy; 2024 EliteVideos. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/database.js"></script>
+    <script src="/js/player.js"></script>
+    
+    <script>
+        // Get video ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('id') || '1';
+        
+        // Load video when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVideo(videoId);
+            loadCategoryVideos();
+            loadRecommendations();
+        });
+        
+        async function loadVideo(id) {
+            // This function will be implemented in player.js
+            console.log('Loading video:', id);
+        }
+        
+        async function loadCategoryVideos() {
+            // This function will be implemented in player.js
+        }
+        
+        async function loadRecommendations() {
+            // This function will be implemented in player.js
+        }
+    </script>
+</body>
+</html>
