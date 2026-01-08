@@ -1,0 +1,262 @@
+[
+  {
+    "id": "trending",
+    "name": "Trending Now",
+    "icon": "fas fa-fire",
+    "count": 24,
+    "description": "Currently trending videos everyone is watching",
+    "color": "#ff4081",
+    "order": 1,
+    "featured": true
+  },
+  {
+    "id": "new",
+    "name": "New Releases",
+    "icon": "fas fa-star",
+    "count": 18,
+    "description": "Freshly uploaded content just added",
+    "color": "#00bcd4",
+    "order": 2,
+    "featured": true
+  },
+  {
+    "id": "popular",
+    "name": "Most Popular",
+    "icon": "fas fa-chart-line",
+    "count": 32,
+    "description": "All-time most viewed videos",
+    "color": "#7c4dff",
+    "order": 3,
+    "featured": true
+  },
+  {
+    "id": "hd",
+    "name": "HD Quality",
+    "icon": "fas fa-hd",
+    "count": 15,
+    "description": "High definition 1080p videos",
+    "color": "#4caf50",
+    "order": 4,
+    "featured": false
+  },
+  {
+    "id": "premium",
+    "name": "Premium",
+    "icon": "fas fa-crown",
+    "count": 12,
+    "description": "Exclusive premium content",
+    "color": "#ff9800",
+    "order": 5,
+    "featured": true
+  },
+  {
+    "id": "exclusive",
+    "name": "Exclusive",
+    "icon": "fas fa-lock",
+    "count": 8,
+    "description": "Members-only exclusive videos",
+    "color": "#9c27b0",
+    "order": 6,
+    "featured": false
+  },
+  {
+    "id": "amateur",
+    "name": "Amateur",
+    "icon": "fas fa-user",
+    "count": 28,
+    "description": "Authentic amateur content",
+    "color": "#795548",
+    "order": 7,
+    "featured": false
+  },
+  {
+    "id": "professional",
+    "name": "Professional",
+    "icon": "fas fa-video",
+    "count": 16,
+    "description": "Professional production videos",
+    "color": "#2196f3",
+    "order": 8,
+    "featured": false
+  },
+  {
+    "id": "4k",
+    "name": "4K Ultra HD",
+    "icon": "fas fa-tv",
+    "count": 9,
+    "description": "Ultra high definition 4K videos",
+    "color": "#ff5722",
+    "order": 9,
+    "featured": false
+  },
+  {
+    "id": "long",
+    "name": "Long Videos",
+    "icon": "fas fa-hourglass",
+    "count": 21,
+    "description": "Extended length content (+30 min)",
+    "color": "#673ab7",
+    "order": 10,
+    "featured": false
+  },
+  {
+    "id": "short",
+    "name": "Short Clips",
+    "icon": "fas fa-clock",
+    "count": 35,
+    "description": "Quick short form content (<5 min)",
+    "color": "#009688",
+    "order": 11,
+    "featured": false
+  },
+  {
+    "id": "vip",
+    "name": "VIP Exclusive",
+    "icon": "fas fa-gem",
+    "count": 6,
+    "description": "VIP members only content",
+    "color": "#e91e63",
+    "order": 12,
+    "featured": true
+  },
+  {
+    "id": "asian",
+    "name": "Asian",
+    "icon": "fas fa-globe-asia",
+    "count": 14,
+    "description": "Asian adult content",
+    "color": "#f44336",
+    "order": 13,
+    "featured": false
+  },
+  {
+    "id": "european",
+    "name": "European",
+    "icon": "fas fa-globe-europe",
+    "count": 11,
+    "description": "European adult content",
+    "color": "#3f51b5",
+    "order": 14,
+    "featured": false
+  },
+  {
+    "id": "american",
+    "name": "American",
+    "icon": "fas fa-flag-usa",
+    "count": 19,
+    "description": "American adult content",
+    "color": "#ff4081",
+    "order": 15,
+    "featured": false
+  },
+  {
+    "id": "anal",
+    "name": "Anal",
+    "icon": "fas fa-arrow-right",
+    "count": 17,
+    "description": "Anal sex content",
+    "color": "#795548",
+    "order": 16,
+    "featured": false
+  },
+  {
+    "id": "blowjob",
+    "name": "Blowjob",
+    "icon": "fas fa-lips",
+    "count": 22,
+    "description": "Oral sex content",
+    "color": "#e91e63",
+    "order": 17,
+    "featured": false
+  },
+  {
+    "id": "lesbian",
+    "name": "Lesbian",
+    "icon": "fas fa-venus",
+    "count": 13,
+    "description": "Lesbian content",
+    "color": "#9c27b0",
+    "order": 18,
+    "featured": false
+  },
+  {
+    "id": "threesome",
+    "name": "Threesome",
+    "icon": "fas fa-users",
+    "count": 8,
+    "description": "Group sex content",
+    "color": "#ff9800",
+    "order": 19,
+    "featured": false
+  },
+  {
+    "id": "hardcore",
+    "name": "Hardcore",
+    "icon": "fas fa-bolt",
+    "count": 20,
+    "description": "Hardcore adult content",
+    "color": "#f44336",
+    "order": 20,
+    "featured": false
+  },
+  {
+    "id": "softcore",
+    "name": "Softcore",
+    "icon": "fas fa-heart",
+    "count": 15,
+    "description": "Softcore adult content",
+    "color": "#ff4081",
+    "order": 21,
+    "featured": false
+  },
+  {
+    "id": "vintage",
+    "name": "Vintage",
+    "icon": "fas fa-history",
+    "count": 7,
+    "description": "Classic vintage content",
+    "color": "#795548",
+    "order": 22,
+    "featured": false
+  },
+  {
+    "id": "milf",
+    "name": "MILF",
+    "icon": "fas fa-user-friends",
+    "count": 12,
+    "description": "Mature content",
+    "color": "#673ab7",
+    "order": 23,
+    "featured": false
+  },
+  {
+    "id": "teen",
+    "name": "Teen",
+    "icon": "fas fa-user-graduate",
+    "count": 18,
+    "description": "Teen content (18+)",
+    "color": "#00bcd4",
+    "order": 24,
+    "featured": false
+  },
+  {
+    "id": "bbw",
+    "name": "BBW",
+    "icon": "fas fa-weight",
+    "count": 9,
+    "description": "Big Beautiful Women",
+    "color": "#ff9800",
+    "order": 25,
+    "featured": false
+  },
+  {
+    "id": "interracial",
+    "name": "Interracial",
+    "icon": "fas fa-globe",
+    "count": 11,
+    "description": "Interracial content",
+    "color": "#3f51b5",
+    "order": 26,
+    "featured": false
+  }
+]
