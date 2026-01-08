@@ -1,0 +1,440 @@
+/* Mobile Specific Styles - Optimized for Premium Adult Site */
+
+@media (max-width: 1023px) {
+    /* Mobile navigation visibility */
+    .mobile-nav {
+        display: block !important;
+    }
+    
+    .premium-nav .nav-search,
+    .premium-nav .nav-user,
+    .premium-nav .category-menu-btn {
+        display: none !important;
+    }
+    
+    /* Mobile search toggle */
+    .mobile-search-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 20px;
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    .mobile-search-container {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-primary);
+        padding: 15px;
+        border-bottom: 1px solid var(--border-color);
+        display: none;
+        z-index: 999;
+    }
+    
+    .mobile-search-container.active {
+        display: block;
+    }
+    
+    .mobile-search-input {
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
+        border-radius: var(--border-radius);
+        color: var(--text-primary);
+        font-size: 14px;
+    }
+    
+    /* Main content padding */
+    .main-content {
+        padding-bottom: 80px;
+    }
+    
+    /* Video grid for mobile */
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    .video-card {
+        margin-bottom: 0;
+    }
+    
+    .video-title {
+        font-size: 14px !important;
+        height: 40px !important;
+    }
+    
+    .video-content {
+        padding: 12px !important;
+    }
+    
+    /* Hero section mobile */
+    .hero-section {
+        padding: 30px 20px !important;
+        margin: 20px 15px !important;
+    }
+    
+    .hero-title {
+        font-size: 28px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .hero-stats {
+        flex-direction: column !important;
+        gap: 15px !important;
+        margin-top: 25px !important;
+    }
+    
+    .stat-item {
+        justify-content: center !important;
+    }
+    
+    /* Category navigation mobile */
+    .category-nav {
+        margin: 20px 15px !important;
+        padding: 12px !important;
+    }
+    
+    .category-nav-scroll {
+        padding: 5px !important;
+    }
+    
+    .category-btn {
+        padding: 8px 14px !important;
+        font-size: 12px !important;
+    }
+    
+    /* Section headers mobile */
+    .section-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        margin: 20px 15px !important;
+    }
+    
+    .section-title {
+        font-size: 18px !important;
+    }
+    
+    /* Video player mobile */
+    .video-player-page {
+        padding-top: 70px !important;
+    }
+    
+    #videoIframe {
+        height: 250px !important;
+    }
+    
+    .video-info-panel {
+        margin: 20px 15px !important;
+        padding: 20px !important;
+    }
+    
+    .video-title-main {
+        font-size: 20px !important;
+    }
+    
+    .video-meta-info {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+    
+    .video-actions {
+        width: 100% !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .action-btn {
+        flex: 1;
+        min-width: 45%;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    
+    /* Search page mobile */
+    .search-header {
+        margin: 20px 15px !important;
+        padding: 20px !important;
+    }
+    
+    .search-header h1 {
+        font-size: 22px !important;
+    }
+    
+    .search-filters {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+    
+    .filter-select {
+        width: 100% !important;
+    }
+    
+    .search-meta {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+    
+    /* Categories grid mobile */
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+        margin: 20px 15px !important;
+    }
+    
+    .category-card {
+        padding: 20px !important;
+    }
+    
+    /* Footer mobile */
+    .footer-container {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 30px !important;
+        padding: 0 15px !important;
+    }
+    
+    .footer-section ul li a {
+        justify-content: center !important;
+    }
+    
+    .age-warning {
+        font-size: 12px !important;
+        padding: 12px !important;
+        margin: 20px 15px !important;
+    }
+    
+    /* Premium features mobile */
+    .premium-features {
+        margin: 40px 15px !important;
+        padding: 20px !important;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .feature-card {
+        padding: 20px !important;
+    }
+    
+    /* Toast notifications mobile */
+    .toast-container {
+        top: 80px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .toast {
+        min-width: auto !important;
+        width: 100%;
+        margin: 0 0 10px 0;
+    }
+    
+    /* Loading spinner */
+    .loading-spinner {
+        padding: 30px !important;
+    }
+    
+    /* Back navigation */
+    .back-navigation {
+        margin: 20px 15px !important;
+    }
+    
+    /* Popular searches */
+    .popular-searches {
+        margin: 20px 15px !important;
+        padding: 20px !important;
+    }
+    
+    /* More from category */
+    .more-from-category {
+        margin: 20px 15px !important;
+        padding: 20px !important;
+    }
+}
+
+/* Extra small devices (phones, less than 480px) */
+@media (max-width: 480px) {
+    .video-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero-title {
+        font-size: 24px !important;
+    }
+    
+    .hero-section {
+        padding: 25px 15px !important;
+        margin: 15px 10px !important;
+    }
+    
+    .section-header {
+        margin: 15px 10px !important;
+    }
+    
+    .video-card {
+        margin: 0 10px !important;
+    }
+    
+    .nav-container {
+        padding: 0 10px !important;
+    }
+    
+    .logo-icon {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    .logo-main {
+        font-size: 20px !important;
+    }
+    
+    .logo-sub {
+        font-size: 8px !important;
+    }
+    
+    .mobile-nav {
+        padding: 8px 10px !important;
+    }
+    
+    .mobile-nav-item {
+        font-size: 9px !important;
+        padding: 6px !important;
+    }
+    
+    .mobile-nav-item .nav-icon {
+        font-size: 16px !important;
+    }
+    
+    .main-content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+/* Tablet devices (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .video-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .hero-title {
+        font-size: 36px !important;
+    }
+    
+    .hero-section {
+        padding: 40px 30px !important;
+        margin: 30px 20px !important;
+    }
+    
+    .nav-search {
+        margin: 0 20px !important;
+    }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .mobile-nav {
+        display: none !important;
+    }
+    
+    .main-content {
+        padding-bottom: 40px !important;
+    }
+    
+    .video-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    .hero-section {
+        padding: 20px !important;
+        margin: 15px !important;
+    }
+    
+    .hero-title {
+        font-size: 24px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .hero-stats {
+        margin-top: 20px !important;
+    }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .premium-theme {
+        background: var(--bg-primary);
+    }
+    
+    .age-verification-modal,
+    .video-card,
+    .search-header,
+    .category-card {
+        background: var(--bg-card);
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #ffffff;
+        --text-secondary: #cccccc;
+        --border-color: #444444;
+    }
+    
+    .video-card,
+    .category-card,
+    .feature-card {
+        border: 2px solid var(--border-color);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .video-card:hover {
+        transform: none;
+    }
+    
+    .video-play-btn,
+    .video-overlay {
+        opacity: 1;
+    }
+}

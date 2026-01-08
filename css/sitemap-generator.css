@@ -1,0 +1,159 @@
+/**
+ * Auto Sitemap Generator for EliteVideos
+ * Run this script to generate sitemap.xml automatically
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// Configuration
+const config = {
+    domain: 'https://yourdomain.com', // Replace with your domain
+    outputFile: 'sitemap.xml',
+    changefreq: 'daily',
+    priority: {
+        homepage: 1.0,
+        categories: 0.9,
+        videos: 0.8,
+        legal: 0.5
+    }
+};
+
+// Get current date in YYYY-MM-DD format
+function getCurrentDate() {
+    return new Date().toISOString().split('T')[0];
+}
+
+// Generate sitemap XML
+function generateSitemap(videos, categories) {
+    const currentDate = getCurrentDate();
+    
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
+    xml += `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n`;
+    xml += `        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"\n`;
+    xml += `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n\n`;
+
+    // Homepage
+    xml += `    <!-- Homepage -->\n`;
+    xml += `    <url>\n`;
+    xml += `        <loc>${config.domain}/</loc>\n`;
+    xml += `        <lastmod>${currentDate}</lastmod>\n`;
+    xml += `        <changefreq>${config.changefreq}</changefreq>\n`;
+    xml += `        <priority>${config.priority.homepage}</priority>\n`;
+    xml += `    </url>\n\n`;
+
+    // Search Page
+    xml += `    <!-- Search Page -->\n`;
+    xml += `    <url>\n`;
+    xml += `        <loc>${config.domain}/search</loc>\n`;
+    xml += `        <lastmod>${currentDate}</lastmod>\n`;
+    xml += `        <changefreq>${config.changefreq}</changefreq>\n`;
+    xml += `        <priority>0.8</priority>\n`;
+    xml += `    </url>\n\n`;
+
+    // Category Pages
+    xml += `    <!-- Category Pages -->\n`;
+    categories.forEach(category => {
+        xml += `    <url>\n`;
+        xml += `        <loc>${config.domain}/category/${category.id}</loc>\n`;
+        xml += `        <lastmod>${currentDate}</lastmod>\n`;
+        xml += `        <changefreq>${config.changefreq}</changefreq>\n`;
+        xml += `        <priority>${config.priority.categories}</priority>\n`;
+        xml += `    </url>\n`;
+    });
+    xml += `\n`;
+
+    // Legal Pages
+    xml += `    <!-- Legal Pages -->\n`;
+    const legalPages = ['terms', 'privacy', 'dmca', '2257'];
+    legalPages.forEach(page => {
+        xml += `    <url>\n`;
+        xml += `        <loc>${config.domain}/${page}</loc>\n`;
+        xml += `        <lastmod>${currentDate}</lastmod>\n`;
+        xml += `        <changefreq>monthly</changefreq>\n`;
+        xml += `        <priority>${config.priority.legal}</priority>\n`;
+        xml += `    </url>\n`;
+    });
+    xml += `\n`;
+
+    // Video Pages
+    xml += `    <!-- Video Pages -->\n`;
+    videos.forEach(video => {
+        xml += `    <url>\n`;
+        xml += `        <loc>${config.domain}/video/${video.id}</loc>\n`;
+        xml += `        <lastmod>${video.uploadDate}</lastmod>\n`;
+        xml += `        <changefreq>weekly</changefreq>\n`;
+        xml += `        <priority>${config.priority.videos}</priority>\n`;
+        
+        // Video XML for Google
+        xml += `        <video:video>\n`;
+        xml += `            <video:thumbnail_loc>${config.domain}${video.thumbnail}</video:thumbnail_loc>\n`;
+        xml += `            <video:title><![CDATA[${video.title}]]></video:title>\n`;
+        xml += `            <video:description><![CDATA[${video.description}]]></video:description>\n`;
+        xml += `            <video:content_loc>${video.embedUrl.replace('/embed/', '/video/')}</video:content_loc>\n`;
+        xml += `            <video:player_loc allow_embed="yes" autoplay="ap=1">${config.domain}/video/embed/${video.id}</video:player_loc>\n`;
+        xml += `            <video:duration>${video.duration}</video:duration>\n`;
+        xml += `            <video:expiration_date>${getExpirationDate(video.uploadDate)}</expiration_date>\n`;
+        xml += `            <video:rating>${video.rating}</video:rating>\n`;
+        xml += `            <video:view_count>${video.views}</video:view_count>\n`;
+        xml += `            <video:publication_date>${video.uploadDate}</video:publication_date>\n`;
+        xml += `            <video:family_friendly>no</video:family_friendly>\n`;
+        xml += `            <video:requires_subscription>no</video:requires_subscription>\n`;
+        if (video.model && video.model.length > 0) {
+            xml += `            <video:uploader info="${config.domain}/model/${video.model[0].toLowerCase().replace(' ', '-')}">${video.model[0]}</video:uploader>\n`;
+        }
+        xml += `            <video:live>no</video:live>\n`;
+        xml += `        </video:video>\n`;
+        
+        // Image XML
+        xml += `        <image:image>\n`;
+        xml += `            <image:loc>${config.domain}${video.thumbnail}</image:loc>\n`;
+        xml += `            <image:title><![CDATA[${video.title}]]></image:title>\n`;
+        xml += `            <image:caption><![CDATA[${video.description.substring(0, 100)}...]]></image:caption>\n`;
+        xml += `        </image:image>\n`;
+        
+        xml += `    </url>\n`;
+    });
+
+    xml += `</urlset>`;
+    
+    return xml;
+}
+
+// Calculate expiration date (1 year from upload)
+function getExpirationDate(uploadDate) {
+    const date = new Date(uploadDate);
+    date.setFullYear(date.getFullYear() + 1);
+    return date.toISOString().split('T')[0];
+}
+
+// Main function
+async function generate() {
+    try {
+        // Load videos data
+        const videosData = JSON.parse(fs.readFileSync('./api/videos.json', 'utf8'));
+        
+        // Load categories data
+        const categoriesData = JSON.parse(fs.readFileSync('./api/categories.json', 'utf8'));
+        
+        // Generate sitemap
+        const sitemap = generateSitemap(videosData, categoriesData);
+        
+        // Write to file
+        fs.writeFileSync(config.outputFile, sitemap, 'utf8');
+        
+        console.log('✅ Sitemap generated successfully!');
+        console.log(`📁 Location: ${config.outputFile}`);
+        console.log(`🌐 Domain: ${config.domain}`);
+        console.log(`🎥 Videos: ${videosData.length}`);
+        console.log(`📂 Categories: ${categoriesData.length}`);
+        console.log(`📊 Total URLs: ${videosData.length + categoriesData.length + 6}`);
+        
+    } catch (error) {
+        console.error('❌ Error generating sitemap:', error.message);
+    }
+}
+
+// Run the generator
+generate();
